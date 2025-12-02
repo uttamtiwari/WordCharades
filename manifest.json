@@ -1,0 +1,27 @@
+{
+  "name": "Word Charades - Guess the Missing Letters",
+  "short_name": "Word Charades",
+  "description": "A modern word guessing game where you reveal hidden consonants. Challenge yourself across multiple categories!",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1a1a2e",
+  "background_color": "#0f0f1e",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "education", "entertainment"],
+  "screenshots": []
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A modern word guessing game where you reveal hidden consonants. Challenge yourself across multiple categories!">
+    <meta name="theme-color" content="#1a1a2e">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <title>Word Charades - Guess the Missing Letters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/words.js?v=2" defer></script>
+    <script src="js/audio.js" defer></script>
+    <script src="script.js?v=2" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Background Elements -->
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+
+        <!-- Home Screen -->
+        <section id="home-screen" class="screen active">
+            <header class="hero">
+                <h1 class="title">Word <span class="highlight">Charades</span></h1>
+                <p class="subtitle">Guess the missing consonants!</p>
+                <div class="lifetime-score-container">
+                    <span>Total Score: </span><span id="lifetime-score-display" class="highlight">0</span>
+                </div>
+                <div class="hero-actions">
+                    <button id="settings-btn" class="icon-btn" title="Settings">⚙️</button>
+                    <button id="tutorial-btn" class="icon-btn" title="How to Play">❓</button>
+                </div>
+            </header>
+
+            <div class="category-container">
+                <h2>Select a Category</h2>
+                <div id="category-grid" class="grid">
+                    <!-- Categories injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="game-screen" class="screen hidden">
+            <header class="game-header">
+                <button id="back-btn" class="icon-btn">←</button>
+                <div class="level-badge">Level <span id="level-display">1</span></div>
+                <div class="score-badge">Score: <span id="score-display">0</span></div>
+            </header>
+
+            <div class="game-area">
+                <div class="word-display" id="word-display">
+                    <!-- Word letters injected here -->
+                </div>
+
+                <div class="hint-text">Category: <span id="current-category">...</span></div>
+
+                <div class="lives-container">
+                    Guesses: <span id="guesses-left">5</span>
+                </div>
+                <div class="hint-container">
+                    <button id="hint-btn" class="hint-btn" title="Use a Hint">
+                        💡 <span id="hint-count">3</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="keyboard" id="keyboard">
+                <!-- Keyboard injected by JS -->
+            </div>
+        </section>
+
+        <!-- Result Modal -->
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <h2 id="result-title">Level Complete!</h2>
+                <div class="result-details">
+                    <p>Word was: <span id="result-word" class="highlight">ORANGE</span></p>
+                    <p>Score: <span id="result-score">100</span></p>
+                    <p id="result-trivia" class="trivia-text"></p>
+                </div>
+                <button id="next-level-btn" class="primary-btn">Next Level</button>
+                <button id="home-btn" class="secondary-btn">Home</button>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <h2>Settings</h2>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <span>🔊 Sound Effects</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>🌙 Dark Theme</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="theme-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <button id="settings-close-btn" class="primary-btn">Close</button>
+            </div>
+        </div>
+
+        <!-- Tutorial Modal -->
+        <div id="tutorial-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <h2>How to Play</h2>
+                <div class="tutorial-content">
+                    <div class="tutorial-step">
+                        <span class="step-number">1</span>
+                        <p><strong>Choose a Category</strong> - Select from Films, Science, Celebrities, and more!</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <span class="step-number">2</span>
+                        <p><strong>Vowels are Revealed</strong> - All vowels (A, E, I, O, U) are shown. Your job is to
+                            guess the consonants!</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <span class="step-number">3</span>
+                        <p><strong>Guess Letters</strong> - Tap consonants on the keyboard. Correct guesses reveal
+                            letters, wrong guesses cost you!</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <span class="step-number">4</span>
+                        <p><strong>Complete the Word</strong> - Reveal all letters before running out of guesses to
+                            advance!</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <span class="step-number">5</span>
+                        <p><strong>Score Points</strong> - Earn more points for faster completions and higher levels!
+                        </p>
+                    </div>
+                </div>
+                <button id="tutorial-close-btn" class="primary-btn">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered:', reg))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+
+</html>
