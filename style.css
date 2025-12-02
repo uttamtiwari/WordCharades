@@ -35,9 +35,7 @@
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    overflow: hidden;
-    /* Prevent scrolling on mobile */
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
 }
 
