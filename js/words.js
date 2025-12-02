@@ -73,8 +73,7 @@ const GAME_DATA = {
         { word: 'SOUL', trivia: 'Soul was Pixar\'s first film with a Black protagonist and explores existential themes rarely tackled in mainstream animated family features.' },
         { word: 'DUNE', trivia: 'Dune\'s sandworms required entirely new digital effects technology and the film\'s sound design won the Academy Award for excellence.' },
         { word: 'WEST SIDE STORY', trivia: 'Steven Spielberg\'s West Side Story remake cast actual Puerto Rican and Latino actors, correcting the problematic casting of the original.' },
-        {
-            word: 'POWER OF DOG', trivia: 'The Power of the Dog showcases Benedict Cumberbatch's transformative performance, learning real ranch skills for his menacing cowboy character authentically.' },
+        { word: 'POWER OF DOG', trivia: 'The Power of the Dog showcases Benedict Cumberbatch\'s transformative performance, learning real ranch skills for his menacing cowboy character authentically.' },
         { word: 'LICORICE PIZZA', trivia: 'Licorice Pizza is named after a Southern California record store chain and captures the nostalgic atmosphere of 1970s San Fernando.' },
         { word: 'BELFAST', trivia: 'Belfast is Kenneth Branagh\'s semi-autobiographical film about his childhood during the Northern Ireland Troubles in the late nineteen-sixties, shot beautifully.' },
         { word: 'KING RICHARD', trivia: 'Will Smith won his first Oscar for playing Richard Williams, the determined father who coached Venus and Serena Williams relentlessly.' },
@@ -339,5 +338,25 @@ const GAME_DATA = {
         { word: 'LEEUWENHOEK', trivia: 'Antonie van Leeuwenhoek created powerful microscopes, discovering microorganisms and describing bacteria, sperm cells, and blood flow.' },
         { word: 'LAVOISIER', trivia: 'Antoine Lavoisier discovered oxygen\'s role in combustion and respiration, establishing modern chemistry before being guillotined during French Revolution.' },
         { word: 'DALTON', trivia: 'John Dalton proposed modern atomic theory explaining chemical reactions and discovered color blindness, which he personally experienced himself.' }
+    ],
+    'Celebrities': [
+        { word: 'BEYONCE', trivia: 'Beyoncé is the most awarded female artist in Grammy history with 32 wins.' },
+        { word: 'DRAKE', trivia: 'Drake has the most Billboard Hot 100 chart entries of any artist ever.' },
+        { word: 'RIHANNA', trivia: 'Rihanna is the richest female musician in the world with billion-dollar fortune.' }
+    ],
+    'Politics': [
+        { word: 'DEMOCRACY', trivia: 'Democracy originated in ancient Athens around 508 BCE with citizen assemblies.' },
+        { word: 'SENATE', trivia: 'The US Senate has 100 members, two from each state.' },
+        { word: 'VOTE', trivia: 'Women in the US gained the right to vote in 1920.' }
+    ],
+    'Geography': [
+        { word: 'AMAZON', trivia: 'The Amazon Rainforest produces approximately 20% of the world\'s oxygen supply.' },
+        { word: 'SAHARA', trivia: 'The Sahara is the largest hot desert in the world.' },
+        { word: 'EVEREST', trivia: 'Mount Everest is the highest mountain above sea level at 29,032 feet.' }
+    ],
+    'History': [
+        { word: 'VIKING', trivia: 'Vikings used onion soup to gauge the depth of their wounds.' },
+        { word: 'SPARTAN', trivia: 'Spartan men were required to serve in the military until age 60.' },
+        { word: 'SAMURAI', trivia: 'Samurai were the military nobility and officer caste of medieval Japan.' }
     ]
 };
