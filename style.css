@@ -298,33 +298,94 @@ body {
 }
 
 .hint-btn {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--text-main);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    border: 2px solid var(--accent);
+    color: var(--bg-dark);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: var(--trans-fast);
+    transition: all var(--trans-fast);
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+    animation: subtlePulse 3s ease-in-out infinite;
+    min-width: 120px;
+    justify-content: center;
+}
+
+@keyframes subtlePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(34, 211, 238, 0.5);
+    }
 }
 
 .hint-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(34, 211, 238, 0.6);
+    border-color: var(--secondary);
 }
 
 .hint-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    animation: none;
 }
 
 .hint-btn.cooldown {
+    background: var(--glass-bg);
     border-color: var(--error);
     color: var(--error);
+    box-shadow: none;
+    animation: none;
 }
+
+/* Attention-seeking animation for wrong guess streak */
+.hint-btn.needs-attention {
+    animation: strongPulse 0.8s ease-in-out infinite, shake 0.5s ease-in-out infinite;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border-color: #fbbf24;
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.8);
+}
+
+@keyframes strongPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-2deg);
+    }
+
+    75% {
+        transform: translateX(5px) rotate(2deg);
+    }
+}
+
 
 /* Keyboard */
 .keyboard {

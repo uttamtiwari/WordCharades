@@ -143,7 +143,8 @@ class GameEngine {
             guessedLetters: new Set(), // Set of chars
             isGameOver: false,
             wordsPlayed: new Set(), // Session played words
-            isNewHighScore: false
+            isNewHighScore: false,
+            consecutiveWrongGuesses: 0 // Track wrong guess streak for hint attention
         };
     }
 
@@ -229,6 +230,9 @@ class GameEngine {
             hits.forEach(h => h.revealed = true);
             audioManager.playCorrect();
 
+            // Reset wrong guess streak on correct guess
+            this.state.consecutiveWrongGuesses = 0;
+
             // Check Win
             if (this.state.maskedWord.every(l => l.revealed)) {
                 this.handleWin();
@@ -236,6 +240,7 @@ class GameEngine {
         } else {
             // Wrong Guess
             this.state.guessesLeft--;
+            this.state.consecutiveWrongGuesses++;
             audioManager.playWrong();
             UI.triggerShake(); // Visual feedback
             if (this.state.guessesLeft <= 0) {
@@ -271,6 +276,9 @@ class GameEngine {
 
                 // Reveal all instances of this letter
                 this.guess(target.char);
+
+                // Reset wrong guess streak when hint is used
+                this.state.consecutiveWrongGuesses = 0;
 
                 // Decrement hint
                 hintState.count--;
@@ -424,17 +432,25 @@ const UI = {
         const now = Date.now();
         const oneHour = 60 * 60 * 1000;
 
+        // Check if we should show attention animation (3+ wrong guesses in a row)
+        const needsAttention = game.state.consecutiveWrongGuesses >= 3;
+
         if (hintState.count > 0) {
             this.elements.hintBtn.disabled = false;
             this.elements.hintCount.textContent = hintState.count;
             this.elements.hintBtn.title = "Use a Hint";
             this.elements.hintBtn.classList.remove('cooldown');
+
+            // Add or remove attention animation
+            if (needsAttention) {
+                this.elements.hintBtn.classList.add('needs-attention');
+            } else {
+                this.elements.hintBtn.classList.remove('needs-attention');
+            }
         } else {
             const timeLeft = oneHour - (now - hintState.lastUsed);
             if (timeLeft <= 0) {
                 // Ready to refill
-                // We'll let the click handler do the actual refill or auto-refill here
-                // Let's auto-refill for better UX if they are on screen
                 hintState.count = 3;
                 StorageManager.saveHintState(hintState);
                 this.updateHintButton();
@@ -444,6 +460,7 @@ const UI = {
                 this.elements.hintCount.textContent = "0";
                 this.elements.hintBtn.title = `Refill in ${minutesLeft}m`;
                 this.elements.hintBtn.classList.add('cooldown');
+                this.elements.hintBtn.classList.remove('needs-attention');
             }
         }
     },
