@@ -1,11 +1,11 @@
 // Service Worker for Word Charades PWA
-const CACHE_NAME = 'word-charades-v1';
+const CACHE_NAME = 'word-charades-v4';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/style.css',
     '/script.js',
-    '/js/words.js',
+    '/js/words_v2.js',
     '/js/audio.js',
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png',
